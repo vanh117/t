@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Đăng ký và đăng nhập</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <style></style>
+  </head>
+  <body>
+    <h1>Đăng ký và đăng nhập</h1>
+    <form id="registerForm" style="display: block">
+      <label for="username">Tên tài khoản:</label>
+      <input type="text" id="username" name="username" /><br /><br />
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password" /><br /><br />
+    </form>
+
+    <form id="loginForm" style="display: none">
+      <label for="login_username">Tên tài khoản:</label>
+      <input
+        type="text"
+        id="login_username"
+        name="login_username"
+      /><br /><br />
+      <label for="login_password">Mật khẩu:</label>
+      <input
+        type="password"
+        id="login_password"
+        name="login_password"
+      /><br /><br />
+      <button type="button" onclick="login()">Đăng nhập</button>
+    </form>
+
+    <button class="but" onclick="showLoginForm()">Đăng nhập</button>
+    <button class="but" onclick="showRegisterForm()">Đăng kí</button>
+
+    <script>
+      function showLoginForm() {
+        document.getElementById("registerForm").style.display = "none";
+
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementByClassName("but").style.display = "none";
+      }
+
+      function showRegisterForm() {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementByClassName("but").style.display = "block";
+        document.getElementById("registerForm").style.display = "block";
+      }
+
+      function register() {
+        // Lấy thông tin từ các trường nhập liệu
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Kiểm tra xem tên tài khoản có tồn tại trong local storage chưa
+        if (localStorage.getItem(username)) {
+          alert("Tài khoản đã tồn tại!");
+        } else {
+          // Lưu thông tin tài khoản vào local storage
+          localStorage.setItem(username, password);
+          alert("Đăng ký thành công!");
+        }
+      }
+
+      function login() {
+        // Lấy thông tin từ các trường nhập liệu
+        var username = document.getElementById("login_username").value;
+        var password = document.getElementById("login_password").value;
+
+        // Kiểm tra xem tài khoản và mật khẩu có khớp với dữ liệu trong local storage không
+        if (localStorage.getItem(username) == password) {
+          alert("Đăng nhập thành công!");
+        } else {
+          alert("Tên tài khoản hoặc mật khẩu không đúng!");
+        }
+      }
+    </script>
+  </body>
+</html>
